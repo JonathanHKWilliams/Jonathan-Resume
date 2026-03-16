@@ -535,7 +535,7 @@ function App() {
                 </div>
                 <div className="p-6 relative group">
                   <h3 className="text-xl font-bold text-black mb-2">Fundraizer Site UI </h3>
-                  <p className="text-xs text-purple-600 font-semibold mb-3">Dashboard Design | 2023</p>
+                  <p className="text-xs text-purple-600 font-semibold mb-3">Website UI Design | 2025</p>
                   <p className="text-gray-700 leading-relaxed text-sm font-semibold mb-4">
                     An online crowdfunding platform that allows individuals or organizations to raise money for a cause, project, emergency or someone in need.
                   </p>
@@ -578,7 +578,7 @@ function App() {
                 </div>
                 <div className="p-6 relative group">
                   <h3 className="text-xl font-bold text-black mb-2">ElectPal – Election Platform</h3>
-                  <p className="text-xs text-purple-600 font-semibold mb-3">Product Design | 2023</p>
+                  <p className="text-xs text-purple-600 font-semibold mb-3">Website UI Design | 2024</p>
                   <p className="text-gray-700 leading-relaxed text-sm font-semibold mb-4">
                     Secure digital voting platform for schools with candidate registration, voter verification, and real-time results.
                   </p>
