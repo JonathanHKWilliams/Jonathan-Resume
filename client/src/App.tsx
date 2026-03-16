@@ -1,10 +1,23 @@
 import { useState, useEffect } from 'react';
-import { FaUser, FaBriefcase, FaLightbulb, FaCode, FaFolderOpen, FaEnvelope, FaPhone, FaWhatsapp, FaCheckCircle, FaLock, FaBook, FaLinkedin, FaGlobe } from 'react-icons/fa';
+import { FaUser, FaBriefcase, FaLightbulb, FaCode, FaFolderOpen, FaEnvelope, FaPhone, FaWhatsapp, FaCheckCircle, FaLock, FaBook, FaLinkedin, FaGlobe, FaDownload } from 'react-icons/fa';
 
 function App() {
   const [activeSection, setActiveSection] = useState('about');
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const downloadPDF = () => {
+    // Create a link element to download the PDF
+    const link = document.createElement('a');
+    link.href = '/portfolio.pdf'; // Path to your PDF file in public folder
+    link.download = 'Jonathan-HK-Williams-Portfolio.pdf';
+    link.target = '_blank';
+    
+    // Trigger the download
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -110,7 +123,7 @@ function App() {
             </div>
           </div>
           <h1 className="text-2xl font-bold mb-1">Jonathan HK Williams</h1>
-          <p className="text-gray-400 text-sm font-semibold">UI/UX Designer</p>
+          <p className="text-gray-400 text-sm font-semibold">Graphic | UI/UX Designer</p>
         </div>
 
         <ul className="space-y-3 flex-1">
@@ -194,11 +207,11 @@ function App() {
         </ul>
 
         <div className="mt-auto">
-          <p className="text-xs text-gray-500">Monrovia, Liberia</p>
+          <p className="text-xs text-gray-500">A passionate Graphic | UI/UX Designer based in Monrovia, Liberia.</p>
         </div>
       </nav>
 
-      <main className="md:ml-64 flex-1 pt-16 md:pt-0">
+      <main id="main-content" className="md:ml-64 flex-1 pt-16 md:pt-0">
         <section className="relative bg-purple-950 text-white">
           <div className="px-4 sm:px-8 md:px-16 py-8 md:py-12">
             <div className="max-w-6xl mx-auto">
@@ -233,6 +246,16 @@ function App() {
                     <br />
                     2023-present
                   </p>
+                  <div className="mt-6">
+                    <button
+                      id="download-pdf-btn"
+                      onClick={downloadPDF}
+                      className="inline-flex items-center gap-2 bg-white text-purple-950 px-4 py-2 rounded-lg font-semibold hover:bg-purple-100 transition-colors"
+                    >
+                      <FaDownload size={16} />
+                      Download Portfolio PDF
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -463,7 +486,7 @@ function App() {
                     }}
                   />
                   <div className="text-center" style={{display: 'none'}}>
-                    <div className="text-4xl mb-2">🚗</div>
+                    <div className="text-4xl mb-2">🏦</div>
                     <p className="text-purple-700 font-semibold">Karnue</p>
                   </div>
                 </div>
@@ -471,7 +494,7 @@ function App() {
                   <h3 className="text-xl font-bold text-black mb-2">Karnue – Ride Sharing</h3>
                   <p className="text-xs text-purple-600 font-semibold mb-3">UI/UX Design | 2024</p>
                   <p className="text-gray-700 leading-relaxed text-sm font-semibold mb-4">
-                    Comprehensive ride-sharing platform with booking, tracking, and payment systems. Improved user onboarding by 40%.
+                    Comprehensive ride sharing platform with booking, tracking, and payment systems. Designed for the US and Africa.
                   </p>
                   <button className="px-4 py-2 bg-purple-600 text-white text-sm font-semibold rounded hover:bg-purple-700 transition-colors">
                     View Project
@@ -493,8 +516,8 @@ function App() {
               <div className="bg-white rounded-lg overflow-hidden hover:bg-gray-50 transition-colors relative group">
                 <div className="h-48 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
                   <img 
-                    src="/images/nemis-project.jpg" 
-                    alt="NEMIS Education Dashboard" 
+                    src="/images/fundraizer-project.jpg" 
+                    alt="Fundraizer Site UI " 
                     className="w-full h-full object-cover"
                     onError={(e) => {
                       const target = e.currentTarget;
@@ -507,14 +530,14 @@ function App() {
                   />
                   <div className="text-center" style={{display: 'none'}}>
                     <div className="text-4xl mb-2">📊</div>
-                    <p className="text-blue-700 font-semibold">NEMIS</p>
+                    <p className="text-blue-700 font-semibold">Fundraizer</p>
                   </div>
                 </div>
                 <div className="p-6 relative group">
-                  <h3 className="text-xl font-bold text-black mb-2">NEMIS Education Dashboard</h3>
+                  <h3 className="text-xl font-bold text-black mb-2">Fundraizer Site UI </h3>
                   <p className="text-xs text-purple-600 font-semibold mb-3">Dashboard Design | 2023</p>
                   <p className="text-gray-700 leading-relaxed text-sm font-semibold mb-4">
-                    Role-based dashboards for education management serving CEOs, Ministers, Teachers, Parents, and Students.
+                    An online crowdfunding platform that allows individuals or organizations to raise money for a cause, project, emergency or someone in need.
                   </p>
                   <button className="px-4 py-2 bg-purple-600 text-white text-sm font-semibold rounded hover:bg-purple-700 transition-colors">
                     View Project
@@ -526,7 +549,7 @@ function App() {
                           <FaLock className="w-3 h-3" /> NDA PROTECTED
                         </span>
                       </div>
-                      <h4 className="text-lg font-bold mb-3">NEMIS Project</h4>
+                      <h4 className="text-lg font-bold mb-3">Fundraizer Site UI</h4>
                       <p className="text-gray-200 font-bold text-sm">Due to confidentiality agreements, detailed project information cannot be displayed publicly.Schedule a one-on-one meeting to see the complete project details and case study.</p>
                     </div>
                   </div>
@@ -607,6 +630,18 @@ function App() {
                   <button onClick={() => openProjectModal('banking-brand')} className="px-4 py-2 bg-purple-600 text-white text-sm font-semibold rounded hover:bg-purple-700 transition-colors">
                     View Project
                   </button>
+                  <div className="absolute top-4 left-2 z-10">
+                  <div className="relative group/tooltip">
+                    <div className="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center cursor-help">
+                      <span className="text-white text-xs font-bold">!</span>
+                    </div>
+                    <div className="absolute left-0 top-8 w-64 p-3 bg-black text-white text-xs rounded-lg shadow-lg opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible transition-all duration-200 z-50">
+                      <div className="font-semibold mb-1">Please read!</div>
+                      <div>Project details and images will be updated in the next few days as we secure proper access to display these projects.</div>
+                      <div className="absolute -top-2 left-4 w-4 h-4 bg-black transform rotate-45"></div>
+                    </div>
+                  </div>
+                </div>
                 </div>
               </div>
 
@@ -634,46 +669,82 @@ function App() {
                 </div>
                 <div className="p-6 relative group">
                   <h3 className="text-xl font-bold text-black mb-2">E-Commerce Brand Design</h3>
-                  <p className="text-xs text-purple-600 font-semibold mb-3">Graphic Design | 2022</p>
+                  <p className="text-xs text-purple-600 font-semibold mb-3">Graphic Design | 2024</p>
                   <p className="text-gray-700 leading-relaxed text-sm font-semibold mb-4">
                     Brand identity and marketing materials for online retail platform including packaging, social media, and web graphics.
                   </p>
                   <button onClick={() => openProjectModal('ecommerce-brand')} className="px-4 py-2 bg-purple-600 text-white text-sm font-semibold rounded hover:bg-purple-700 transition-colors">
                     View Project
                   </button>
+                  <div className="absolute top-4 left-2 z-10">
+                  <div className="relative group/tooltip">
+                    <div className="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center cursor-help">
+                      <span className="text-white text-xs font-bold">!</span>
+                    </div>
+                    <div className="absolute left-0 top-8 w-64 p-3 bg-black text-white text-xs rounded-lg shadow-lg opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible transition-all duration-200 z-50">
+                      <div className="font-semibold mb-1">Please read!</div>
+                      <div>Project details and images will be updated in the next few days as we secure proper access to display these projects.</div>
+                      <div className="absolute -top-2 left-4 w-4 h-4 bg-black transform rotate-45"></div>
+                    </div>
+                  </div>
+                </div>
                 </div>
               </div>
 
               <div className="bg-white rounded-lg overflow-hidden hover:bg-gray-50 transition-colors relative group">
-                <div className="h-48 relative">
-                  <img 
-                    src="/images/healthcare-project-card.jpg" 
-                    alt="Healthcare Brand System Project" 
-                    className="w-full h-48 object-cover"
-                    onError={(e) => {
-                      const target = e.currentTarget;
-                      target.style.display = 'none';
-                      const fallback = target.nextElementSibling as HTMLElement;
-                      if (fallback) {
-                        fallback.style.display = 'flex';
-                      }
-                    }}
-                  />
-                  <div className="w-full h-48 bg-gradient-to-br from-indigo-100 to-indigo-200 flex items-center justify-center" style={{display: 'none'}}>
-                    <div className="text-center">
-                      <div className="text-4xl mb-2">⚕️</div>
-                      <p className="text-indigo-700 font-semibold">Healthcare</p>
+                <div className="h-48 relative bg-gradient-to-br from-gray-50 to-gray-100">
+                  <div className="grid grid-cols-2 gap-2 p-4 h-full">
+                    <div className="relative overflow-hidden rounded-lg">
+                      <img 
+                        src="/images/gallery-1.jpg" 
+                        alt="Gallery Item 1" 
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          const target = e.currentTarget;
+                          target.style.display = 'none';
+                          const fallback = target.nextElementSibling as HTMLElement;
+                          if (fallback) {
+                            fallback.style.display = 'flex';
+                          }
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center" style={{display: 'none'}}>
+                        <div className="text-center">
+                          <div className="text-2xl mb-1">🖼️</div>
+                          <p className="text-gray-700 font-semibold text-xs">Gallery 1</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="relative overflow-hidden rounded-lg">
+                      <img 
+                        src="/images/gallery-2.jpg" 
+                        alt="Gallery Item 2" 
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          const target = e.currentTarget;
+                          target.style.display = 'none';
+                          const fallback = target.nextElementSibling as HTMLElement;
+                          if (fallback) {
+                            fallback.style.display = 'flex';
+                          }
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center" style={{display: 'none'}}>
+                        <div className="text-center">
+                          <div className="text-2xl mb-1">🖼️</div>
+                          <p className="text-gray-700 font-semibold text-xs">Gallery 2</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div className="p-6 relative group">
-                  <h3 className="text-xl font-bold text-black mb-2">Healthcare Brand System</h3>
-                  <p className="text-xs text-purple-600 font-semibold mb-3">Graphic Design | 2022</p>
+                  <h3 className="text-xl font-bold text-black mb-2">Flyer Design Gallery</h3>
                   <p className="text-gray-700 leading-relaxed text-sm font-semibold mb-4">
-                    Comprehensive brand system for healthcare provider including logo design, stationery, and marketing collateral.
+                    A curated collection of design work showcasing various creative projects and visual communication solutions.
                   </p>
-                  <button onClick={() => openProjectModal('healthcare-brand')} className="px-4 py-2 bg-purple-600 text-white text-sm font-semibold rounded hover:bg-purple-700 transition-colors">
-                    View Project
+                  <button onClick={() => openProjectModal('design-gallery')} className="px-4 py-2 bg-purple-600 text-white text-sm font-semibold rounded hover:bg-purple-700 transition-colors">
+                    View Gallery
                   </button>
                 </div>
               </div>
@@ -1191,7 +1262,7 @@ function App() {
             </div>
             
             <div className="p-6">
-              <p className="text-lg text-purple-600 font-semibold mb-6">Graphic Design | 2022</p>
+              <p className="text-lg text-purple-600 font-semibold mb-6">Graphic Design | 2024</p>
               
               <div className="mb-8">
                 <h3 className="text-xl font-bold mb-4 text-black">Project Overview</h3>
@@ -1352,171 +1423,84 @@ function App() {
         </div>
       )}
 
-      {selectedProject === 'healthcare-brand' && (
+      {selectedProject === 'design-gallery' && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-lg max-w-6xl w-full max-h-[90vh] overflow-y-auto">
             <div className="sticky top-0 bg-white border-b border-gray-200 p-6 flex justify-between items-center">
-              <h2 className="text-2xl font-bold text-black">Healthcare Brand System</h2>
+              <h2 className="text-2xl font-bold text-black">Flyer Design Gallery</h2>
               <button onClick={closeProjectModal} className="text-gray-500 hover:text-gray-700 text-2xl font-bold">×</button>
             </div>
             
             <div className="p-6">
-              <p className="text-lg text-purple-600 font-semibold mb-6">Graphic Design | 2022</p>
-              
               <div className="mb-8">
-                <h3 className="text-xl font-bold mb-4 text-black">Project Overview</h3>
-                <p className="text-gray-700 leading-relaxed font-semibold mb-4">
-                  Comprehensive brand system for a healthcare provider offering primary care, specialty services, and telemedicine. The project included logo design, stationery, signage, patient communication materials, website graphics, and internal brand guidelines. The challenge was to create a brand identity that conveyed trust, care, and professionalism while remaining approachable and patient-friendly.
-                </p>
-                <p className="text-gray-700 leading-relaxed font-semibold">
-                  The brand system emphasizes clarity and compassion through calming colors, clear typography, and consistent visual elements that work across all patient touchpoints.
-                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
+                    <div key={num} className="bg-gray-100 rounded-lg overflow-hidden group">
+                      <div className="relative aspect-[3/4]">
+                        <img 
+                          src={`/images/gallery-${num}.jpg`} 
+                          alt={`Design Work ${num}`} 
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          onError={(e) => {
+                            const target = e.currentTarget;
+                            target.style.display = 'none';
+                            const fallback = target.nextElementSibling as HTMLElement;
+                            if (fallback) {
+                              fallback.style.display = 'flex';
+                            }
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center" style={{display: 'none'}}>
+                          <div className="text-center">
+                            <div className="text-4xl mb-2">🖼️</div>
+                            <p className="text-gray-700 font-semibold">Gallery {num}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               <div className="mb-8">
-                <h3 className="text-xl font-bold mb-4 text-black">Brand Components</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="bg-gray-100 rounded-lg overflow-hidden">
-                    <img 
-                      src="/images/healthcare-logo.png" 
-                      alt="Healthcare Primary Logo" 
-                      className="w-full h-32 object-cover"
-                      onError={(e) => {
-                        const target = e.currentTarget;
-                        target.style.display = 'none';
-                        const fallback = target.nextElementSibling as HTMLElement;
-                        if (fallback) {
-                          fallback.style.display = 'flex';
-                        }
-                      }}
-                    />
-                    <div className="w-full h-32 bg-gray-100 flex items-center justify-center" style={{display: 'none'}}>
-                      <div className="text-4xl">⚕️</div>
+                <h3 className="text-xl font-bold mb-4 text-black">Design Areas</h3>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-0 text-sm">
+                    <div>
+                      <h4 className="font-bold mb-1 text-black">Branding</h4>
+                      <ul className="font-bold text-gray-700 space-y-0">
+                        <li>• Logo Design</li>
+                        <li>• Brand Identity</li>
+                        <li>• Visual Systems</li>
+                      </ul>
                     </div>
-                  </div>
-                  <div className="bg-gray-100 rounded-lg overflow-hidden">
-                    <img 
-                      src="/images/healthcare-colors.png" 
-                      alt="Healthcare Color Palette" 
-                      className="w-full h-32 object-cover"
-                      onError={(e) => {
-                        const target = e.currentTarget;
-                        target.style.display = 'none';
-                        const fallback = target.nextElementSibling as HTMLElement;
-                        if (fallback) {
-                          fallback.style.display = 'flex';
-                        }
-                      }}
-                    />
-                    <div className="w-full h-32 bg-gray-100 flex items-center justify-center" style={{display: 'none'}}>
-                      <div className="text-4xl">�</div>
+                    <div>
+                      <h4 className="font-bold mb-1 text-black">Marketing</h4>
+                      <ul className="font-bold text-gray-700 space-y-0">
+                        <li>• Digital Graphics</li>
+                        <li>• Print Materials</li>
+                        <li>• Social Media</li>
+                      </ul>
                     </div>
-                  </div>
-                  <div className="bg-gray-100 rounded-lg overflow-hidden">
-                    <img 
-                      src="/images/healthcare-stationery.png" 
-                      alt="Healthcare Stationery" 
-                      className="w-full h-32 object-cover"
-                      onError={(e) => {
-                        const target = e.currentTarget;
-                        target.style.display = 'none';
-                        const fallback = target.nextElementSibling as HTMLElement;
-                        if (fallback) {
-                          fallback.style.display = 'flex';
-                        }
-                      }}
-                    />
-                    <div className="w-full h-32 bg-gray-100 flex items-center justify-center" style={{display: 'none'}}>
-                      <div className="text-4xl">📋</div>
-                    </div>
-                  </div>
-                  <div className="bg-gray-100 rounded-lg overflow-hidden">
-                    <img 
-                      src="/images/healthcare-signage.png" 
-                      alt="Healthcare Signage System" 
-                      className="w-full h-32 object-cover"
-                      onError={(e) => {
-                        const target = e.currentTarget;
-                        target.style.display = 'none';
-                        const fallback = target.nextElementSibling as HTMLElement;
-                        if (fallback) {
-                          fallback.style.display = 'flex';
-                        }
-                      }}
-                    />
-                    <div className="w-full h-32 bg-gray-100 flex items-center justify-center" style={{display: 'none'}}>
-                      <div className="text-4xl">🏥</div>
+                    <div>
+                      <h4 className="font-bold mb-1 text-black">Digital</h4>
+                      <ul className="font-bold text-gray-700 space-y-0">
+                        <li>• Web Design</li>
+                        <li>• UI Elements</li>
+                        <li>• Interactive Media</li>
+                      </ul>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="mb-8">
-              <img 
-                src="/images/healthcare-banner.jpg" 
-                alt="Healthcare Patient Experience" 
-                className="w-full h-48 object-cover rounded-lg"
-                onError={(e) => {
-                  const target = e.currentTarget;
-                  target.style.display = 'none';
-                  const fallback = target.nextElementSibling as HTMLElement;
-                  if (fallback) {
-                    fallback.style.display = 'flex';
-                  }
-                }}
-              />
-              <div className="w-full h-48 bg-gradient-to-r from-indigo-100 to-indigo-200 rounded-lg flex items-center justify-center" style={{display: 'none'}}>
-                <div className="text-center">
-                  <div className="text-3xl mb-2">🩺</div>
-                  <p className="text-indigo-700 font-semibold">Patient Experience Banner</p>
+              <div className="mb-6">
+                <div className="bg-gray-40 p-4">
+                  <p className="text-black text-sm font-medium">
+                    There are many more flyer designs in my collection that couldn't fit in this gallery. Contact me to see more flyer and marketing materials.
+                  </p>
                 </div>
               </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="relative">
-                <img 
-                  src="/images/healthcare-app.jpg" 
-                  alt="Healthcare Patient App" 
-                  className="w-full h-32 object-cover rounded-lg"
-                  onError={(e) => {
-                    const target = e.currentTarget;
-                    target.style.display = 'none';
-                    const fallback = target.nextElementSibling as HTMLElement;
-                    if (fallback) {
-                      fallback.style.display = 'flex';
-                    }
-                  }}
-                />
-                <div className="w-full h-32 bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-lg flex items-center justify-center" style={{display: 'none'}}>
-                  <div className="text-center">
-                    <div className="text-2xl mb-1">📱</div>
-                    <p className="text-indigo-600 font-semibold text-sm">Patient App</p>
-                  </div>
-                </div>
-              </div>
-              <div className="relative">
-                <img 
-                  src="/images/healthcare-communication.jpg" 
-                  alt="Healthcare Communication" 
-                  className="w-full h-32 object-cover rounded-lg"
-                  onError={(e) => {
-                    const target = e.currentTarget;
-                    target.style.display = 'none';
-                    const fallback = target.nextElementSibling as HTMLElement;
-                    if (fallback) {
-                      fallback.style.display = 'flex';
-                    }
-                  }}
-                />
-                <div className="w-full h-32 bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-lg flex items-center justify-center" style={{display: 'none'}}>
-                  <div className="text-center">
-                    <div className="text-2xl mb-1">📧</div>
-                    <p className="text-indigo-600 font-semibold text-sm">Communication</p>
-                  </div>
-                </div>
-              </div>
-            </div>
             </div>
           </div>
         </div>

@@ -7,7 +7,7 @@ Add your images in this folder with the following filenames:
 
 ## Project Screenshots:
 - `karnue-project.jpg` - Screenshot for Karnue Ride Sharing Platform
-- `nemis-project.jpg` - Screenshot for NEMIS Education Dashboard  
+- `fundraizer-project.jpg` - Screenshot for Fundraizer Site UI   
 - `electpal-project.jpg` - Screenshot for ElectPal School Election Platform
 - `growlocal-project.jpg` - Screenshot for GrowLocal Farmers Marketplace
 
