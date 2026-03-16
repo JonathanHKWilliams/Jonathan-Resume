@@ -1,10 +1,35 @@
-import { useState } from 'react';
-import { FaUser, FaBriefcase, FaLightbulb, FaCode, FaFolderOpen, FaAward, FaEnvelope, FaPhone, FaWhatsapp, FaCheckCircle, FaPalette, FaMobile, FaGraduationCap, FaLock, FaBook } from 'react-icons/fa';
+import { useState, useEffect } from 'react';
+import { FaUser, FaBriefcase, FaLightbulb, FaCode, FaFolderOpen, FaEnvelope, FaPhone, FaWhatsapp, FaCheckCircle, FaLock, FaBook, FaLinkedin, FaGlobe } from 'react-icons/fa';
 
 function App() {
   const [activeSection, setActiveSection] = useState('about');
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['about', 'skills', 'projects', 'experience', 'education', 'philosophy', 'contact'];
+      const scrollPosition = window.scrollY + 100;
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check initial position
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const scrollToSection = (sectionId: string) => {
     setActiveSection(sectionId);
@@ -29,7 +54,7 @@ function App() {
         <div className="flex items-center justify-between p-4">
           <div>
             <h1 className="text-lg font-bold">Jonathan HK Williams</h1>
-            <p className="text-xs text-gray-400">UI/UX Designer</p>
+            <p className="text-xs text-gray-400">Graphic | UI/UX Designer</p>
           </div>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -44,7 +69,7 @@ function App() {
         {mobileMenuOpen && (
           <div className="border-t border-gray-700">
             <ul className="py-2">
-              {['about', 'skills', 'projects', 'experience', 'leadership', 'education', 'philosophy', 'contact'].map((section) => (
+              {['about', 'skills', 'projects', 'experience', 'education', 'philosophy', 'contact'].map((section) => (
                 <li key={section}>
                   <button
                     onClick={() => scrollToSection(section)}
@@ -63,7 +88,27 @@ function App() {
 
       {/* Desktop Sidebar */}
       <nav className="hidden md:flex fixed left-0 top-0 h-screen w-64 bg-black text-white p-8 flex-col">
-        <div className="mb-12">
+        <div className="mb-12 text-center">
+          <div className="w-24 h-24 mx-auto mb-4 overflow-hidden rounded-full border-4 border-purple-600">
+            <img 
+              src="/images/profile-banner.jpg" 
+              alt="Jonathan HK Williams" 
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                const target = e.currentTarget;
+                target.style.display = 'none';
+                const fallback = target.nextElementSibling as HTMLElement;
+                if (fallback) {
+                  fallback.style.display = 'flex';
+                }
+              }}
+            />
+            <div className="w-full h-full bg-gradient-to-br from-purple-700 to-purple-900 flex items-center justify-center" style={{display: 'none'}}>
+              <div className="text-center">
+                <div className="text-3xl mb-1">👨‍💼</div>
+              </div>
+            </div>
+          </div>
           <h1 className="text-2xl font-bold mb-1">Jonathan HK Williams</h1>
           <p className="text-gray-400 text-sm font-semibold">UI/UX Designer</p>
         </div>
@@ -111,17 +156,6 @@ function App() {
             >
               <FaBriefcase size={18} />
               <span>Experience</span>
-            </button>
-          </li>
-          <li>
-            <button
-              onClick={() => scrollToSection('leadership')}
-              className={`flex items-center space-x-3 w-full text-left px-4 py-3 transition-all rounded font-semibold ${
-                activeSection === 'leadership' ? 'bg-purple-600 text-white w-full' : 'text-gray-400 hover:text-white'
-              }`}
-            >
-              <FaAward size={18} />
-              <span>Leadership</span>
             </button>
           </li>
           <li>
@@ -206,14 +240,14 @@ function App() {
         </section>
 
         <section id="about" className="min-h-screen p-4 sm:p-8 md:p-16 border-b border-gray-200">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-6 md:mb-8 text-black">About Me</h2>
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-black">About Me</h2>
             <div className="space-y-4 md:space-y-6 text-gray-700 text-base sm:text-lg leading-relaxed font-semibold">
               <p>
-                I am Jonathan HK Williams, a passionate UI/UX Designer, Graphic Designer, and Product Designer based in Monrovia, Liberia. With a deep commitment to creating digital experiences that matter, I specialize in transforming complex business challenges into elegant, user-centered design solutions.
+                I am Jonathan HK Williams, a passionate UI/UX Designer, Graphic Designer, and Product Designer based in Monrovia, Liberia. With a deep commitment to creating digital experiences that matter, I specialize in transforming business challenges into elegant, user-centered design solutions.
               </p>
               <p>
-                My design philosophy centers on simplicity, functionality, and human-centered thinking. I believe that great design is not just about aesthetics—it's about solving real problems and creating intuitive interfaces that users love to interact with. Every project I undertake is an opportunity to craft something meaningful.
+                My design philosophy centers on simplicity, functionality, and human centered thinking. I believe that great design is not just about aesthetics, it's about solving real problems and creating intuitive interfaces that users love to interact with. Every project I undertake is an opportunity to craft something meaningful.
               </p>
               <p>
                 Throughout my career, I have worked on diverse projects ranging from ride-sharing platforms and education management systems to election platforms and agricultural marketplaces. I excel at bridging the gap between product vision and user reality, ensuring that every design decision is backed by research and user insights.
@@ -228,9 +262,9 @@ function App() {
           </div>
         </section>
 
-        <section id="skills" className="p-16 border-b border-gray-200 bg-gray-50">
+        <section id="skills" className="p-4 sm:p-8 md:p-16 border-b border-gray-200 bg-gray-50">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-bold mb-12 text-black">Skills & Expertise</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-black">Skills & Expertise</h2>
 
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
               <table className="w-full">
@@ -543,10 +577,25 @@ function App() {
               </div>
 
               <div className="bg-white rounded-lg overflow-hidden hover:bg-gray-50 transition-colors relative group">
-                <div className="h-48 bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-4xl mb-2">🏦</div>
-                    <p className="text-orange-700 font-semibold">Banking Brand</p>
+                <div className="h-48 relative">
+                  <img 
+                    src="/images/banking-project-card.jpg" 
+                    alt="Banking Brand Identity Project" 
+                    className="w-full h-48 object-cover"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      target.style.display = 'none';
+                      const fallback = target.nextElementSibling as HTMLElement;
+                      if (fallback) {
+                        fallback.style.display = 'flex';
+                      }
+                    }}
+                  />
+                  <div className="w-full h-48 bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center" style={{display: 'none'}}>
+                    <div className="text-center">
+                      <div className="text-4xl mb-2">🏦</div>
+                      <p className="text-orange-700 font-semibold">Banking Brand</p>
+                    </div>
                   </div>
                 </div>
                 <div className="p-6 relative group">
@@ -562,10 +611,25 @@ function App() {
               </div>
 
               <div className="bg-white rounded-lg overflow-hidden hover:bg-gray-50 transition-colors relative group">
-                <div className="h-48 bg-gradient-to-br from-pink-100 to-pink-200 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-4xl mb-2">🛒</div>
-                    <p className="text-pink-700 font-semibold">E-Commerce</p>
+                <div className="h-48 relative">
+                  <img 
+                    src="/images/ecommerce-project-card.jpg" 
+                    alt="E-Commerce Brand Design Project" 
+                    className="w-full h-48 object-cover"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      target.style.display = 'none';
+                      const fallback = target.nextElementSibling as HTMLElement;
+                      if (fallback) {
+                        fallback.style.display = 'flex';
+                      }
+                    }}
+                  />
+                  <div className="w-full h-48 bg-gradient-to-br from-pink-100 to-pink-200 flex items-center justify-center" style={{display: 'none'}}>
+                    <div className="text-center">
+                      <div className="text-4xl mb-2">🛒</div>
+                      <p className="text-pink-700 font-semibold">E-Commerce</p>
+                    </div>
                   </div>
                 </div>
                 <div className="p-6 relative group">
@@ -581,10 +645,25 @@ function App() {
               </div>
 
               <div className="bg-white rounded-lg overflow-hidden hover:bg-gray-50 transition-colors relative group">
-                <div className="h-48 bg-gradient-to-br from-indigo-100 to-indigo-200 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-4xl mb-2">⚕️</div>
-                    <p className="text-indigo-700 font-semibold">Healthcare</p>
+                <div className="h-48 relative">
+                  <img 
+                    src="/images/healthcare-project-card.jpg" 
+                    alt="Healthcare Brand System Project" 
+                    className="w-full h-48 object-cover"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      target.style.display = 'none';
+                      const fallback = target.nextElementSibling as HTMLElement;
+                      if (fallback) {
+                        fallback.style.display = 'flex';
+                      }
+                    }}
+                  />
+                  <div className="w-full h-48 bg-gradient-to-br from-indigo-100 to-indigo-200 flex items-center justify-center" style={{display: 'none'}}>
+                    <div className="text-center">
+                      <div className="text-4xl mb-2">⚕️</div>
+                      <p className="text-indigo-700 font-semibold">Healthcare</p>
+                    </div>
                   </div>
                 </div>
                 <div className="p-6 relative group">
@@ -608,45 +687,18 @@ function App() {
           </div>
         </section>
 
-        <section id="experience" className="min-h-screen p-16 border-b border-gray-200 bg-gray-50">
+        <section id="experience" className="min-h-screen p-4 sm:p-8 md:p-16 border-b border-gray-200 bg-gray-50">
           <div className="max-w-4xl">
-            <h2 className="text-4xl font-bold mb-12 text-black">Professional Experience</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-black">Professional Experience</h2>
 
             <div className="space-y-6">
-              <div className="bg-white p-8">
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h3 className="text-2xl font-bold text-black">Freelance</h3>
-                    <p className="text-purple-600 font-semibold text-sm mt-1">2024 – Present</p>
-                  </div>
-                  <FaCheckCircle className="text-purple-600" size={24} />
+              <div className="bg-white p-4 sm:p-6 md:p-8">
+                <div className="mb-4">
+                  <h3 className="text-xl sm:text-2xl font-bold text-black">Freelance</h3>
+                  <p className="text-purple-600 font-semibold text-sm mt-1">2024 – Present</p>
                 </div>
                 <p className="text-gray-700 mb-6 leading-relaxed font-semibold">
                   Work as an independent designer providing UI/UX and graphic design services to organizations and businesses, while also contributing to design education through volunteer instruction.
-                </p>
-              </div>
-
-              <div className="bg-white p-8">
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h3 className="text-2xl font-bold text-black">UI/UX Designer</h3>
-                  </div>
-                  <FaCheckCircle className="text-purple-600" size={24} />
-                </div>
-                <p className="text-gray-700 mb-6 leading-relaxed font-semibold">
-                  Design user-focused digital interfaces and product concepts for organizations including Smart Liberia, Zongea Institute of Technology, and Walamen.
-                </p>
-              </div>
-
-              <div className="bg-white p-8">
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h3 className="text-2xl font-bold text-black">Graphic Designer</h3>
-                  </div>
-                  <FaPalette className="text-purple-600" size={24} />
-                </div>
-                <p className="text-gray-700 mb-6 leading-relaxed font-semibold">
-                  Provide visual design services for Tropical Print Press and Smart Liberia and more other Businesses, focusing on marketing and communication materials.
                 </p>
                 <ul className="space-y-3 text-gray-700">
                   <li className="flex items-start gap-3">
@@ -664,115 +716,148 @@ function App() {
                 </ul>
               </div>
 
-              <div className="bg-white p-8">
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h3 className="text-2xl font-bold text-black">Volunteer Graphic Design Instructor</h3>
-                    <p className="text-purple-600 font-semibold text-sm mt-1">Zongea</p>
+              <div className="bg-white p-4 sm:p-6 md:p-8">
+                <div className="mb-4">
+                  <h3 className="text-xl sm:text-2xl font-bold text-black">UI/UX Designer</h3>
+                </div>
+                <p className="text-gray-700 mb-4 leading-relaxed font-semibold">
+                  Design user-focused digital interfaces and product concepts for organizations including Smart Liberia, Zongea Institute of Technology, and Walamen and other brands...
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <div className="relative">
+                    <img 
+                      src="/images/smart-liberia-project.jpg" 
+                      alt="Smart Liberia Project" 
+                      className="w-16 h-16 object-cover rounded-lg"
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        target.style.display = 'none';
+                        const fallback = target.nextElementSibling as HTMLElement;
+                        if (fallback) {
+                          fallback.style.display = 'flex';
+                        }
+                      }}
+                    />
+                    <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center" style={{display: 'none'}}>
+                      <div className="text-center">
+                        <div className="text-sm mb-1">🎓</div>
+                      </div>
+                    </div>
                   </div>
-                  <FaGraduationCap className="text-purple-600" size={24} />
+                  <div className="relative">
+                    <img 
+                      src="/images/zongea-project.jpg" 
+                      alt="Zongea Institute Project" 
+                      className="w-16 h-16 object-cover rounded-lg"
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        target.style.display = 'none';
+                        const fallback = target.nextElementSibling as HTMLElement;
+                        if (fallback) {
+                          fallback.style.display = 'flex';
+                        }
+                      }}
+                    />
+                    <div className="w-16 h-16 bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg flex items-center justify-center" style={{display: 'none'}}>
+                      <div className="text-center">
+                        <div className="text-sm mb-1">🏫</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="relative">
+                    <img 
+                      src="/images/walamen-project.jpg" 
+                      alt="Walamen Project" 
+                      className="w-16 h-16 object-cover rounded-lg"
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        target.style.display = 'none';
+                        const fallback = target.nextElementSibling as HTMLElement;
+                        if (fallback) {
+                          fallback.style.display = 'flex';
+                        }
+                      }}
+                    />
+                    <div className="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center" style={{display: 'none'}}>
+                      <div className="text-center">
+                        <div className="text-sm mb-1">🏢</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white p-4 sm:p-6 md:p-8">
+                <div className="mb-4">
+                  <h3 className="text-xl sm:text-2xl font-bold text-black">Volunteer Graphic Design Instructor</h3>
                 </div>
                 <p className="text-gray-700 mb-6 leading-relaxed font-semibold">
                   Serve as a volunteer instructor supporting students interested in graphic design at the Zongea Institue of Technology
                 </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="leadership" className="min-h-screen p-16 border-b border-gray-200 bg-gradient-to-b from-white to-gray-50">
-          <div className="max-w-4xl">
-            <h2 className="text-4xl font-bold mb-12 text-black">Leadership</h2>
-
-            <div className="bg-white p-12">
-              <div className="mb-8">
-                <h3 className="text-3xl font-bold text-black mb-2">Founder & CEO</h3>
-                <p className="text-2xl text-purple-600 font-bold">LIIGHT DESIGN INC</p>
-                <p className="text-sm text-gray-500 mt-2">Since 2022</p>
-              </div>
-
-              <p className="text-gray-700 leading-relaxed mb-8 font-semibold">
-                Founded and built LIIGHT DESIGN INC, a creative and technology-focused company specializing in digital design, innovation consulting, and product development. The company has grown to serve 30+ clients across various industries including fintech, edtech, agriculture, and healthcare.
-              </p>
-
-              <div className="space-y-6">
-                <div>
-                  <h4 className="text-xl font-bold text-black mb-3 flex items-center gap-2">
-                    <FaCheckCircle className="text-purple-600" size={20} /> Company Vision
-                  </h4>
-                  <p className="text-gray-700 leading-relaxed font-semibold">
-                    To create transformative digital experiences that solve real problems and drive meaningful impact for businesses and communities across Africa and beyond.
-                  </p>
-                </div>
-
-                <div>
-                  <h4 className="text-xl font-bold text-black mb-3 flex items-center gap-2">
-                    <FaCheckCircle className="text-purple-600" size={20} /> Key Responsibilities
-                  </h4>
-                  <ul className="space-y-3 text-gray-700">
-                    <li className="flex items-start gap-3">
-                      <span className="text-purple-600 font-bold">→</span>
-                      <span className="font-semibold">Strategic planning and business development, identifying growth opportunities and market trends</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-purple-600 font-bold">→</span>
-                      <span className="font-semibold">Leading a talented team of designers and developers, fostering a culture of innovation and excellence</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-purple-600 font-bold">→</span>
-                      <span className="font-semibold">Managing client relationships and ensuring project delivery exceeds expectations</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-purple-600 font-bold">→</span>
-                      <span className="font-semibold">Driving design innovation and maintaining high standards across all projects</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-purple-600 font-bold">→</span>
-                      <span className="font-semibold">Building partnerships with technology companies and digital agencies for expanded reach</span>
-                    </li>
-                  </ul>
-                </div>
-
-                <div>
-                  <h4 className="text-xl font-bold text-black mb-3 flex items-center gap-2">
-                    <FaCheckCircle className="text-purple-600" size={20} /> Achievements
-                  </h4>
-                  <ul className="space-y-3 text-gray-700">
-                    <li className="flex items-start gap-3">
-                      <FaCheckCircle className="text-purple-600 mt-1 flex-shrink-0" size={16} />
-                      <span className="font-semibold">Grew company from solo venture to team of 8+ professionals in 2 years</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <FaCheckCircle className="text-purple-600 mt-1 flex-shrink-0" size={16} />
-                      <span className="font-semibold">Delivered 50+ successful projects with 95% client satisfaction rate</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <FaCheckCircle className="text-purple-600 mt-1 flex-shrink-0" size={16} />
-                      <span className="font-semibold">Established LIIGHT DESIGN as a trusted design partner in the region</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <FaCheckCircle className="text-purple-600 mt-1 flex-shrink-0" size={16} />
-                      <span className="font-semibold">Mentored 20+ junior designers and contributed to design community growth</span>
-                    </li>
-                  </ul>
+                <div className="flex items-center gap-3">
+                  <FaGlobe className="text-purple-600" size={24} />
+                  <a 
+                    href="https://zongeatech.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-purple-600 font-semibold text-sm hover:text-purple-700 transition-colors cursor-pointer relative group"
+                    title="Click to visit Zongea Institute of Technology website"
+                  >
+                    zongeatech.com
+                    <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-gray-800 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                      Click to visit website
+                    </span>
+                  </a>
+                  <FaLinkedin className="text-blue-600" size={24} />
+                  <a 
+                    href="https://www.linkedin.com/school/zongea-institute-of-technology/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-blue-600 font-semibold text-sm hover:text-blue-700 transition-colors cursor-pointer relative group"
+                    title="Click to view Zongea Institute of Technology LinkedIn profile"
+                  >
+                    Zongea Institute of Technology
+                    <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-gray-800 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                      Click to view LinkedIn profile
+                    </span>
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="education" className="min-h-screen p-16 border-b border-gray-200 bg-gradient-to-b from-gray-50 to-white">
+        <section id="education" className="min-h-screen p-4 sm:p-8 md:p-16 border-b border-gray-200 bg-gradient-to-b from-gray-50 to-white">
           <div className="max-w-4xl">
-            <h2 className="text-4xl font-bold mb-12 text-black">Education</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-black">Education</h2>
 
-            <div className="space-y-8">
-              <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-200">
-                <div className="flex items-start justify-between mb-4">
+            <div className="space-y-6 sm:space-y-8">
+              <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-sm border border-gray-200">
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-12 h-12 flex-shrink-0">
+                    <img 
+                      src="/images/zongea-logo.png" 
+                      alt="Zongea Institute of Technology Logo" 
+                      className="w-full h-full object-contain"
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        target.style.display = 'none';
+                        const fallback = target.nextElementSibling as HTMLElement;
+                        if (fallback) {
+                          fallback.style.display = 'flex';
+                        }
+                      }}
+                    />
+                    <div className="w-full h-full bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg flex items-center justify-center" style={{display: 'none'}}>
+                      <div className="text-center">
+                        <div className="text-xl">🎓</div>
+                      </div>
+                    </div>
+                  </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-black">Zongea Institute of Technology</h3>
+                    <h3 className="text-xl sm:text-2xl font-bold text-black">Zongea Institute of Technology</h3>
                     <p className="text-purple-600 font-semibold text-sm mt-1">Diploma / Certificate in Computer Studies | 2023 – 2024</p>
                   </div>
-                  <FaGraduationCap className="text-purple-600" size={24} />
                 </div>
                 
                 <p className="text-gray-700 leading-relaxed font-semibold">
@@ -780,13 +865,32 @@ function App() {
                 </p>
               </div>
 
-              <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-200">
-                <div className="flex items-start justify-between mb-4">
+              <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-sm border border-gray-200">
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-12 h-12 flex-shrink-0">
+                    <img 
+                      src="/images/orange-digital-logo.png" 
+                      alt="Orange Digital Center Logo" 
+                      className="w-full h-full object-contain"
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        target.style.display = 'none';
+                        const fallback = target.nextElementSibling as HTMLElement;
+                        if (fallback) {
+                          fallback.style.display = 'flex';
+                        }
+                      }}
+                    />
+                    <div className="w-full h-full bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center" style={{display: 'none'}}>
+                      <div className="text-center">
+                        <div className="text-xl">📚</div>
+                      </div>
+                    </div>
+                  </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-black">Orange Digital Center</h3>
+                    <h3 className="text-xl sm:text-2xl font-bold text-black">Orange Digital Center</h3>
                     <p className="text-purple-600 font-semibold text-sm mt-1">UI/UX Design Training Program | 2024</p>
                   </div>
-                  <FaBook className="text-purple-600" size={24} />
                 </div>
                 
                 <p className="text-gray-700 leading-relaxed font-semibold mb-4">
@@ -804,13 +908,10 @@ function App() {
                 </div>
               </div>
 
-              <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-200">
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h3 className="text-2xl font-bold text-black">Independent Learning — UI/UX & Graphic Design</h3>
-                    <p className="text-purple-600 font-semibold text-sm mt-1">Self-Directed Learning | 2021 – Present</p>
-                  </div>
-                  <FaPalette className="text-purple-600" size={24} />
+              <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-sm border border-gray-200">
+                <div className="mb-4">
+                  <h3 className="text-xl sm:text-2xl font-bold text-black">Independent Learning — UI/UX & Graphic Design</h3>
+                  <p className="text-purple-600 font-semibold text-sm mt-1">Self-Directed Learning | 2023 – Present</p>
                 </div>
                 
                 <p className="text-gray-700 leading-relaxed font-semibold mb-4">
@@ -836,10 +937,10 @@ function App() {
           </div>
         </section>
 
-        <section id="philosophy" className="p-16 border-b border-gray-200 bg-black text-white">
+        <section id="philosophy" className="p-4 sm:p-8 md:p-16 border-b border-gray-200 bg-black text-white">
           <div className="max-w-4xl">
-            <h2 className="text-4xl font-bold mb-12 text-white">Design Philosophy</h2>
-            <blockquote className="text-3xl leading-relaxed italic border-l-4 border-purple-600 pl-8 mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-white">Design Philosophy</h2>
+            <blockquote className="text-xl sm:text-2xl md:text-3xl leading-relaxed italic border-l-4 border-purple-600 pl-4 sm:pl-6 md:pl-8 mb-8 md:mb-12">
               "I believe design should be simple, useful, and human-centered. My goal is always to
               create work that solves real problems while delivering clear and enjoyable user experiences."
             </blockquote>
@@ -876,7 +977,7 @@ function App() {
                   <div className="flex items-start gap-4">
                     <FaWhatsapp className="text-purple-600 mt-1" size={24} />
                     <div>
-                      <p className="text-sm text-gray-600 font-semibold">WhatsApp</p>
+                      <p className="text-sm text-gray-600 font-semibold">WhatsApp Business</p>
                       <a href="https://wa.me/231776201256" target="_blank" rel="noopener noreferrer" className="text-lg text-black font-semibold hover:text-purple-600 transition-colors">
                         +231 776 201 256
                       </a>
